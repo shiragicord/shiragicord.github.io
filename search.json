@@ -7,7 +7,7 @@
 "tags": ["Windows", "Linux", "Ubuntu", "備忘録"],
 "url": "/200830/sl/",
 "date": "2020-08-30",
-"content": "Vector新山(へろぱ) 様によりSL for Win32 ConsoleがVectorで公開されているのでそれを使えばOK。しかも音が鳴るという謎仕様 神仕様。Windows Subsystem for Linuxdism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all「Windowsの機能の有効化または無効化」よりWSLを有効化。再起動後、Microsoft Storeから好きなディストリビューションをダウンロード、インストールして初期設定。その後、PS &gt; wsl.exe(WSL) $ sudo apt update(WSL) $ sudo apt install sl(WSL) $ slでSLが拝める。PATH内に@wsl.exe sl %*%をsl.batで保存すれば、直接呼べるようになる。ただ、自分の環境だとなぜか爆速でSLが走り去ってしまうので、次の方法を試した。MinGW-gcc でビルドgit clone https://github.com/mtoyoda/sl.gitcd slをして gcc -o sl.exe sl.c でできるかと思ったらできなかったので、結果的にmingw-get install mingw32-libncurses # すでに行われているなら不要Set-Variable mingw_path (MinGWのパス)gcc -I ${mingw_path}\\include\\ncurses -o sl.exe sl.c ${mingw_path}\\lib\\libncurses.a.\\sl.exeでできた。なんかすごい遅いけど満足満足。ちなみにこれを実行した後に、もう一回WSLで実行したらこれぐらい遅くなった…謎。"
+"content": "Vector新山(へろぱ) 様によりSL for Win32 Consoleが公開されているのでそれを使えばOK。しかも音が鳴るという謎仕様 神仕様。Windows Subsystem for Linuxdism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all「Windowsの機能の有効化または無効化」よりWSLを有効化。再起動後、Microsoft Storeから好きなディストリビューションをダウンロード、インストールして初期設定。その後、PS &gt; wsl.exe(WSL) $ sudo apt update(WSL) $ sudo apt install sl(WSL) $ slでSLが拝める。PATH内に@wsl.exe sl %*%をsl.batで保存すれば、直接呼べるようになる。ただ、自分の環境だとなぜか爆速でSLが走り去ってしまうので、次の方法を試した。MinGW-gcc でビルドgit clone https://github.com/mtoyoda/sl.gitcd slをして gcc -o sl.exe sl.c でできるかと思ったらできなかったので、結果的にmingw-get install mingw32-libncurses # すでに行われているなら不要Set-Variable mingw_path (MinGWのパス)gcc -I ${mingw_path}\\include\\ncurses -o sl.exe sl.c ${mingw_path}\\lib\\libncurses.a.\\sl.exeでできた。なんかすごい遅いけど満足満足。ちなみにこれを実行した後に、もう一回WSLで実行したらこれぐらい遅くなった…謎。"
 }, 
 
 {
