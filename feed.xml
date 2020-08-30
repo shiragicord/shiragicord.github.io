@@ -1,3 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-08-24T11:22:12+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Hello, World</title><link href="https://shiragicord.github.io/200823/hello/" rel="alternate" type="text/html" title="Hello, World" /><published>2020-08-23T00:00:00+09:00</published><updated>2020-08-23T00:00:00+09:00</updated><id>https://shiragicord.github.io/200823/hello</id><content type="html" xml:base="https://shiragicord.github.io/200823/hello/">&lt;h1 id=&quot;hello-world&quot;&gt;Hello, World&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-08-30T14:13:42+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">WindowsでSLを走らせたい</title><link href="https://shiragicord.github.io/200830/sl/" rel="alternate" type="text/html" title="WindowsでSLを走らせたい" /><published>2020-08-30T00:00:00+09:00</published><updated>2020-08-30T00:00:00+09:00</updated><id>https://shiragicord.github.io/200830/sl</id><content type="html" xml:base="https://shiragicord.github.io/200830/sl/">&lt;h2 id=&quot;vector&quot;&gt;Vector&lt;/h2&gt;
+&lt;p&gt;新山(へろぱ) 様により&lt;a href=&quot;https://www.vector.co.jp/soft/winnt/amuse/se515801.html&quot;&gt;SL for Win32 Console&lt;/a&gt;がVectorで公開されているのでそれを使えばOK。&lt;/p&gt;
+
+&lt;p&gt;しかも音が鳴るという&lt;del&gt;謎仕様&lt;/del&gt; &lt;strong&gt;神仕様&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;windows-subsystem-for-linux&quot;&gt;Windows Subsystem for Linux&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ps&quot;&gt;dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;「Windowsの機能の有効化または無効化」よりWSLを有効化。&lt;/p&gt;
+
+&lt;p&gt;再起動後、Microsoft Storeから好きなディストリビューションをダウンロード、インストールして初期設定。&lt;/p&gt;
+
+&lt;p&gt;その後、&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PS &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; wsl.exe
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;WSL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt update
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;WSL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sl
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;WSL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;でSLが拝める。&lt;/p&gt;
+
+&lt;p&gt;PATH内に&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@wsl.exe &lt;span class=&quot;kd&quot;&gt;sl&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;をsl.batで保存すれば、直接呼べるようになる。&lt;/p&gt;
+
+&lt;p&gt;ただ、自分の環境だとなぜか爆速でSLが走り去ってしまうので、次の方法を試した。&lt;/p&gt;
+
+&lt;h2 id=&quot;mingw-gcc-でビルド&quot;&gt;MinGW-gcc でビルド&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ps&quot;&gt;git clone https://github.com/mtoyoda/sl.git
+cd sl
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;をして &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gcc -o sl.exe sl.c&lt;/code&gt; でできるかと思ったらできなかったので、&lt;/p&gt;
+
+&lt;p&gt;結果的に&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ps&quot;&gt;mingw-get install mingw32-libncurses # すでに行われているなら不要
+
+Set-Variable mingw_path (MinGWのパス)
+gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses.a
+.\sl.exe
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;でできた。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/200830-sl-win.gif&quot; alt=&quot;実行した画面&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;なんかすごい遅いけど満足満足。&lt;/p&gt;
+
+&lt;p&gt;ちなみにこれを実行した後に、もう一回WSLで実行したらこれぐらい遅くなった…謎。&lt;/p&gt;</content><author><name></name></author><category term="Windows" /><category term="Linux" /><category term="Ubuntu" /><category term="備忘録" /><summary type="html">Vector 新山(へろぱ) 様によりSL for Win32 ConsoleがVectorで公開されているのでそれを使えばOK。 しかも音が鳴るという謎仕様 神仕様。 Windows Subsystem for Linux dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all 「Windowsの機能の有効化または無効化」よりWSLを有効化。 再起動後、Microsoft Storeから好きなディストリビューションをダウンロード、インストールして初期設定。 その後、 PS &amp;gt; wsl.exe (WSL) $ sudo apt update (WSL) $ sudo apt install sl (WSL) $ sl でSLが拝める。 PATH内に @wsl.exe sl %*% をsl.batで保存すれば、直接呼べるようになる。 ただ、自分の環境だとなぜか爆速でSLが走り去ってしまうので、次の方法を試した。 MinGW-gcc でビルド git clone https://github.com/mtoyoda/sl.git cd sl をして gcc -o sl.exe sl.c でできるかと思ったらできなかったので、 結果的に mingw-get install mingw32-libncurses # すでに行われているなら不要 Set-Variable mingw_path (MinGWのパス) gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses.a .\sl.exe でできた。 なんかすごい遅いけど満足満足。 ちなみにこれを実行した後に、もう一回WSLで実行したらこれぐらい遅くなった…謎。</summary></entry><entry><title type="html">Hello, World</title><link href="https://shiragicord.github.io/200823/hello/" rel="alternate" type="text/html" title="Hello, World" /><published>2020-08-23T00:00:00+09:00</published><updated>2020-08-23T00:00:00+09:00</updated><id>https://shiragicord.github.io/200823/hello</id><content type="html" xml:base="https://shiragicord.github.io/200823/hello/">&lt;h1 id=&quot;hello-world&quot;&gt;Hello, World&lt;/h1&gt;
 
 &lt;p&gt;Hello Blog!!&lt;/p&gt;</content><author><name></name></author><summary type="html">Hello, World Hello Blog!!</summary></entry></feed>
