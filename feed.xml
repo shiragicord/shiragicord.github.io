@@ -1,266 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-09-06T11:16:30+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">もうYouTubeにMP4でアップロードするのやめません？</title><link href="https://shiragicord.github.io/200905/ytcodecs/" rel="alternate" type="text/html" title="もうYouTubeにMP4でアップロードするのやめません？" /><published>2020-09-05T00:00:00+09:00</published><updated>2020-09-05T00:00:00+09:00</updated><id>https://shiragicord.github.io/200905/ytcodecs</id><content type="html" xml:base="https://shiragicord.github.io/200905/ytcodecs/">&lt;blockquote&gt;
-  &lt;p&gt;「動画の画質や音質なんて別に気にしてないよ」という方を対象にはしていません。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-09-22T21:12:17+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Android 10版 システムアプリの強制無効化方法</title><link href="https://shiragicord.github.io/200922/disable-docomo/" rel="alternate" type="text/html" title="Android 10版 システムアプリの強制無効化方法" /><published>2020-09-22T00:00:00+09:00</published><updated>2020-09-22T00:00:00+09:00</updated><id>https://shiragicord.github.io/200922/disable_docomo</id><content type="html" xml:base="https://shiragicord.github.io/200922/disable-docomo/">&lt;blockquote&gt;
+  &lt;p&gt;以下の内容は、docomo版Galaxy A20 (SC-02M) の Android 10 で動作確認をしています。
+他の機種や、Androidのバージョンによっては使えない可能性もあります。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;今でも、YouTubeで活動されている多くの日本人は、MP4でアップロードされている動画が多いです。&lt;/p&gt;
+&lt;h2 id=&quot;有名なコマンドも引き続き利用可能&quot;&gt;有名なコマンドも引き続き利用可能&lt;/h2&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb shell pm uninstall -k --user 0 &amp;lt;package name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;このコマンドは引き続き使えます。&lt;/p&gt;
 
-&lt;p&gt;しかし、すでに海外では、&lt;strong&gt;WebM&lt;/strong&gt;という形式など、MP4以外のほかの形式でアップロードしている方が多く見受けられます。&lt;/p&gt;
+&lt;h2 id=&quot;実はあまり知られていないコマンド&quot;&gt;実はあまり知られていないコマンド&lt;/h2&gt;
 
-&lt;p&gt;だから、日本人も&lt;strong&gt;WebMでアップロードしよう！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;次のコマンドも使えることを確認しました。&lt;/p&gt;
 
-&lt;p&gt;といってもあれなので、WebMにするとどんなメリットがあるかを紹介します。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb shell pm disable-user &amp;lt;package name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;youtubeはvp9で動画を再生している&quot;&gt;YouTubeは、VP9で動画を再生している。&lt;/h2&gt;
-&lt;p&gt;MP4では、&lt;strong&gt;h264&lt;/strong&gt;という形式で動画がエンコードされているのが多いのに対し、WebMは、&lt;strong&gt;VP9&lt;/strong&gt;という動画でエンコードされているものがあります。&lt;/p&gt;
+&lt;h2 id=&quot;それぞれの挙動の違い&quot;&gt;それぞれの挙動の違い&lt;/h2&gt;
+&lt;h3 id=&quot;uninstall&quot;&gt;uninstall&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb shell pm uninstall -k --user 0 &amp;lt;package name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;を実行すると、&lt;strong&gt;アプリがアンインストールされます&lt;/strong&gt;。(厳密には/system配下に残存)&lt;/p&gt;
 
-&lt;p&gt;で、&lt;strong&gt;VP9とは何なのか？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Androidの設定画面のアプリ一覧からも姿を消すため、&lt;/p&gt;
 
-&lt;p&gt;簡単に言うと、&lt;strong&gt;h264&lt;/strong&gt;よりも、&lt;strong&gt;少ない容量&lt;/strong&gt;で、&lt;strong&gt;高画質な動画&lt;/strong&gt;を再生できる&lt;strong&gt;ビデオコーデック&lt;/strong&gt;というものです。 &lt;br /&gt;
-(ブログ主の調査では、とある動画をエンコードしたとき、h264が&lt;strong&gt;166MB&lt;/strong&gt;だったのに対し、VP9は&lt;strong&gt;109MB&lt;/strong&gt;だった。)&lt;/p&gt;
+&lt;p&gt;復活させるには以下のコマンドを打つ必要があります。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb shell pm install-existing &amp;lt;package name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;よく&lt;strong&gt;h264&lt;/strong&gt;動画で指摘されてい&lt;strong&gt;ブロックノイズ問題&lt;/strong&gt;も、&lt;strong&gt;VP9&lt;/strong&gt;では、それを同じ容量(ビットレート)でも&lt;strong&gt;軽減が期待できます&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&quot;disable-user&quot;&gt;disable-user&lt;/h3&gt;
+&lt;p&gt;試しに実行してみました。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ adb shell pm disable-user com.android.contacts
+Package com.android.contacts new state: disabled-user
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;出力結果の通り、このコマンドは、パッケージに「ユーザーで無効化」属性が付与されます。&lt;/p&gt;
 
-&lt;p&gt;ということは、動画を作る側も、&lt;strong&gt;VP9でアップロードすれば&lt;/strong&gt;、より高画質な動画を期待できるようになります。&lt;/p&gt;
+&lt;p&gt;つまり、&lt;strong&gt;アプリが無効化&lt;/strong&gt;されています。&lt;/p&gt;
 
-&lt;p&gt;YouTube側も、VP9のアップロード、再生に対応していて、最近では、ほとんどの動画がVP9で再生されるようになっています。&lt;/p&gt;
+&lt;p&gt;そのため、Androidの設定画面から、アプリが無効化されていることが確認できます。&lt;/p&gt;
 
-&lt;div style=&quot;padding: 10px; margin-bottom: 10px; border: 1px solid #000000;&quot;&gt;
-&lt;img src=&quot;/200905/ytcodecs/vp9-opus.png&quot; /&gt;&lt;br /&gt;
-&lt;strong&gt;VP9&lt;/strong&gt;、&lt;strong&gt;Opus&lt;/strong&gt;を使用していると表示されているYouTubeの詳細統計情報
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/200922/disable_docomo/disabled_screenshot.jpg&quot; alt=&quot;設定画面から「無効」が確認できる。&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;ただし、対応ブラウザではないと見れないので、例えば、&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Internet Explorer (Windows)&lt;/li&gt;
-  &lt;li&gt;Safari (macOS X)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;強制的に無効化できる&lt;/strong&gt;ため、設定画面からでは無効化できない (「無効」ボタンがグレーアウトされている) アプリでも使えます。&lt;/p&gt;
 
-&lt;p&gt;は&lt;strong&gt;VP9&lt;/strong&gt;非対応です。&lt;br /&gt;
-(これらのブラウザでは、&lt;strong&gt;h264&lt;/strong&gt;で再生されます。)&lt;/p&gt;
+&lt;p&gt;なお、有効化するには、設定で「有効」ボタンを押すか、&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;VP9&lt;/strong&gt;で視聴するには、&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Google Chrome&lt;/li&gt;
-  &lt;li&gt;FireFox&lt;/li&gt;
-  &lt;li&gt;Microsoft Edge (EdgeHTML / Chromium)&lt;/li&gt;
-  &lt;li&gt;その他 Chromiumベースブラウザ (Opera, Vivaldi等)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;以下のコマンドを入力することで有効化できます。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;adb shell pm enable com.android.contacts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;等で見る必要があります。&lt;/p&gt;
+&lt;h2 id=&quot;使い分け方&quot;&gt;使い分け方&lt;/h2&gt;
+&lt;h3 id=&quot;uninstall-1&quot;&gt;uninstall&lt;/h3&gt;
+&lt;p&gt;アプリの存在を消すことができるため、&lt;strong&gt;将来的に有効化する可能性がない&lt;/strong&gt;場合に使えます。&lt;/p&gt;
 
-&lt;p&gt;いずれのブラウザもWindows, Mac共に対応、&lt;br /&gt;
-Edge以外のブラウザはLinuxにも対応しています。&lt;br /&gt;
-(OS自体が動画再生の要件を満たす必要があります。)&lt;/p&gt;
+&lt;p&gt;アプリリストに表示されるだけでも&lt;strong&gt;煩わしい&lt;/strong&gt;場合に有効です。&lt;/p&gt;
 
-&lt;h2 id=&quot;youtubeの音質はもう悪くない&quot;&gt;YouTubeの音質は、もう悪くない！&lt;/h2&gt;
-&lt;p&gt;MP4では、&lt;strong&gt;AAC&lt;/strong&gt;という音声コーデックが使用されてきました。&lt;/p&gt;
+&lt;p&gt;disable-userを実行してもすぐに復活するアプリにはこれしかありません。&lt;/p&gt;
 
-&lt;p&gt;AACはMP3に比べ、比較的少ない容量でも高音質が期待できましたが、やはりCDに比べ、&lt;strong&gt;数値的には&lt;/strong&gt;劣れていました。&lt;/p&gt;
+&lt;p&gt;元に戻すのには、adbコマンドか初期化しかないため、面倒になります。&lt;/p&gt;
 
-&lt;p&gt;以前はYouTube側も、最高音質&lt;strong&gt;AAC 192kbps&lt;/strong&gt;で再生されていました。&lt;/p&gt;
+&lt;h3 id=&quot;disable-user-1&quot;&gt;disable-user&lt;/h3&gt;
+&lt;p&gt;設定画面には残るため、&lt;strong&gt;簡単に有効化できます&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;p&gt;(しかし、これでも音質的にはあまり違和感を感じなかった方が多いと思います。)&lt;/p&gt;
+&lt;p&gt;今は使わないけど、&lt;strong&gt;将来的に使うかもしれない&lt;/strong&gt;場合に有効です。&lt;/p&gt;
 
-&lt;p&gt;しかし、現在では&lt;strong&gt;Opus&lt;/strong&gt;という形式で再生されています。&lt;/p&gt;
-
-&lt;p&gt;YouTube側で再生されている、&lt;strong&gt;Opus (128kbps VBR)&lt;/strong&gt;は、ほとんどCDと聞き分けができないとされています。(下手するとハイレゾと聞き比べてもわからないほど。)&lt;/p&gt;
-
-&lt;p&gt;具体的な数値でいうと、&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;コーデック&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;ビットレート&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;カットオフ周波数&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;AAC&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128 kbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;15.8 kHz&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128 kbps VBR&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;20.0 kHz&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;と、Opusの音質が圧倒的であることがわかります。&lt;br /&gt;
-(カットオフ周波数が、音質のすべてはありません。)&lt;br /&gt;
-(YouTubeで再生されているAACは、上の表のAACとカットオフ周波数が異なる可能性があります。)&lt;/p&gt;
-
-&lt;p&gt;つまり、YouTubeの音質は、低い容量でも、&lt;strong&gt;人間の耳では聞き分けがかなり難しい&lt;/strong&gt;ほど品質が良くなりました。&lt;/p&gt;
-&lt;div style=&quot;padding: 10px; margin-bottom: 10px; border: 1px solid #000000;&quot;&gt;
-&lt;img src=&quot;/200905/ytcodecs/spectram.jpg&quot; /&gt;&lt;br /&gt;
-YouTubeでOpus形式の動画を再生したときのスペクトラム画像&lt;br /&gt;
-20.0kHzでカットされている。
-&lt;/div&gt;
-
-&lt;p&gt;そのため、&lt;strong&gt;AAC 320kbps&lt;/strong&gt;や&lt;strong&gt;Opus&lt;/strong&gt;、&lt;strong&gt;PCM&lt;/strong&gt;や&lt;strong&gt;FLAC&lt;/strong&gt;でアップロードすれば、充分な音質が期待できます。&lt;/p&gt;
-
-&lt;p&gt;音質を特に気にしないでアップロードするなら、WebMのOpusで十分ですし、&lt;/p&gt;
-
-&lt;p&gt;音質重視なら、ロスレスFLACや、PCMで&lt;strong&gt;MKV&lt;/strong&gt;に直接埋め込むことで、再エンコード回数を１回にすることができます。&lt;/p&gt;
-
-&lt;p&gt;ただし、Opusを再生するにも、対応ブラウザが必要で、&lt;/p&gt;
-
-&lt;p&gt;対応ブラウザ&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Google Chrome&lt;/li&gt;
-  &lt;li&gt;FireFox&lt;/li&gt;
-  &lt;li&gt;Microsoft Edge (EdgeHTML / Chromium)&lt;/li&gt;
-  &lt;li&gt;その他 Chromiumベースブラウザ (Opera, Vivaldi等)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;非対応ブラウザ (AACで再生)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Internet Explorer (Windows)&lt;/li&gt;
-  &lt;li&gt;Safari (macOS X)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;となっております。&lt;/p&gt;
-
-&lt;h1 id=&quot;youtubeは再エンコードしている&quot;&gt;YouTubeは再エンコードしている&lt;/h1&gt;
-&lt;p&gt;YouTubeに動画をアップロードするためには、動画を編集ソフトで書き出し(エンコード)を行う必要があります。しかし、YouTubeにアップロードされた動画は、YouTube側でも再書き出し(再エンコード)が行われます。&lt;/p&gt;
-
-&lt;p&gt;そのため、アップロードされた動画がそのままの品質で再生されることはありません。&lt;/p&gt;
-
-&lt;p&gt;しかも、MP4でアップロードされた動画も、YouTube側でWebMで再エンコードが行われるのですが、&lt;strong&gt;元(MP4)の品質が悪い&lt;/strong&gt;と、いくらWebM(VP9, Opus)でも&lt;strong&gt;元の品質よりよくなる&lt;/strong&gt;ことはありません。&lt;/p&gt;
-
-&lt;p&gt;ということは、品質を気にするなら再エンコードされる形式よりも&lt;strong&gt;いいもので&lt;/strong&gt;アップロードする必要があります。&lt;/p&gt;
-
-&lt;p&gt;しかし、そのためにMP4の動画容量(ビットレート)を上げるのは、&lt;strong&gt;あまり効率的ではありません&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;その代わりに、十分な品質ののWebM(VP9, Opus)にすれば、アップロード時の容量が&lt;strong&gt;MP4より小さく&lt;/strong&gt;、そしてYouTube側で&lt;strong&gt;きれいな動画&lt;/strong&gt;を再生できることが期待できます。&lt;/p&gt;
-
-&lt;h2 id=&quot;実はvp9ももう古い&quot;&gt;実はVP9ももう古い？&lt;/h2&gt;
-
-&lt;p&gt;先ほど、&lt;strong&gt;VP9でアップロードすることで、より高画質な動画を期待できる&lt;/strong&gt;と述べましたが、&lt;/p&gt;
-
-&lt;p&gt;実は、YouTubeは新たなビデオコーデックへの対応が進んでいます。&lt;/p&gt;
-
-&lt;p&gt;それは、 &lt;strong&gt;&lt;del&gt;h265 (HEVC)&lt;/del&gt;&lt;/strong&gt; ではなく、&lt;/p&gt;
-
-&lt;p&gt;現在急上昇中の&lt;strong&gt;AV1&lt;/strong&gt;というものです。&lt;/p&gt;
-
-&lt;div style=&quot;padding: 10px; margin-bottom: 10px; border: 1px solid #000000;&quot;&gt;
-&lt;img src=&quot;/200905/ytcodecs/av1.png&quot; /&gt;&lt;br /&gt;
-AV1と表示されているYouTubeの詳細統計情報&lt;br /&gt;
-日本でも上位のYouTubeクリエイターでこのコーデックを再生できることが多い&lt;br /&gt;
-(ただし、元がMP4なのでそこまで期待できないが)
-&lt;/div&gt;
-
-&lt;p&gt;AV1は、多くの企業に支持されている新しいコーデックで、すでにYouTubeの他にも、Netflixが対応しています。&lt;/p&gt;
-
-&lt;p&gt;AV1は、h265 (HEVC)やVP9に比べ、さらに&lt;strong&gt;圧縮率が向上&lt;/strong&gt;していて、次の動画コーデックの&lt;strong&gt;実質標準規格になる&lt;/strong&gt;とも噂されています。&lt;/p&gt;
-
-&lt;p&gt;ただし、まだAV1はエンコードに&lt;strong&gt;大変時間がかかり&lt;/strong&gt;、個人用途としては少し微妙です。&lt;/p&gt;
-
-&lt;p&gt;(ブログ主の調査では、ffmpegでエンコードしたとき、AV1はVP9に比べて&lt;strong&gt;10倍遅い&lt;/strong&gt;。)&lt;/p&gt;
-
-&lt;h2 id=&quot;まとめ&quot;&gt;まとめ&lt;/h2&gt;
-&lt;p&gt;MP4は、今では同じ容量でも&lt;strong&gt;画質が悪い&lt;/strong&gt;、&lt;strong&gt;音も悪い&lt;/strong&gt;とメリットがないので、&lt;/p&gt;
-
-&lt;p&gt;これからYouTubeに動画をアップロードするときは、&lt;strong&gt;WebM&lt;/strong&gt;の&lt;strong&gt;VP9&lt;/strong&gt;、&lt;strong&gt;Opus&lt;/strong&gt;でアップロードしましょう。&lt;/p&gt;
-
-&lt;p&gt;同じ画質、音質でも動画ファイルの容量が&lt;strong&gt;小さくなること&lt;/strong&gt;が期待できます。&lt;/p&gt;
-
-&lt;p&gt;なお、WebM形式で出力するのには、&lt;/p&gt;
-
-&lt;p&gt;Adobe Premiere Proは追加のプラグインが必要です。&lt;/p&gt;
-
-&lt;p&gt;AviUtlも別のプラグインが必要です。&lt;br /&gt;
-ただし、AviUtlのプラグインは今のところGUIでWebMを細かく調整できるプラグインは作られていません。&lt;br /&gt;
-(ただし、CUIならある。)&lt;/p&gt;
-
-&lt;p&gt;ffmpegは、VP9, AV1, Opusともにデコード、エンコードがサポートされています。&lt;/p&gt;
-
-&lt;p&gt;なお、個人的におすすめな設定も載せておきます。&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;解像度&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;フレーム数&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;映像コーデック&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;映像ビットレート&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;音声コーデック&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;音声ビットレート&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1280x720&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;30 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;5 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1280x720&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;60 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;5 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1920x1080&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;30 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;10 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;1920x1080&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;60 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;10 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2560x1440&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;30 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;20 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;2560x1440&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;60 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;20 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3840x2160&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;30 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;40 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;3840x2160&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;60 FPS&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;VP9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;40 Mbps&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;Opus&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;128kbps VBR&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</content><author><name></name></author><category term="YouTube" /><category term="ファイル拡張子" /><category term="ファイルフォーマット" /><summary type="html">「動画の画質や音質なんて別に気にしてないよ」という方を対象にはしていません。 今でも、YouTubeで活動されている多くの日本人は、MP4でアップロードされている動画が多いです。 しかし、すでに海外では、WebMという形式など、MP4以外のほかの形式でアップロードしている方が多く見受けられます。 だから、日本人もWebMでアップロードしよう！ といってもあれなので、WebMにするとどんなメリットがあるかを紹介します。 YouTubeは、VP9で動画を再生している。 MP4では、h264という形式で動画がエンコードされているのが多いのに対し、WebMは、VP9という動画でエンコードされているものがあります。 で、VP9とは何なのか？ 簡単に言うと、h264よりも、少ない容量で、高画質な動画を再生できるビデオコーデックというものです。 (ブログ主の調査では、とある動画をエンコードしたとき、h264が166MBだったのに対し、VP9は109MBだった。) よくh264動画で指摘されていブロックノイズ問題も、VP9では、それを同じ容量(ビットレート)でも軽減が期待できます。 ということは、動画を作る側も、VP9でアップロードすれば、より高画質な動画を期待できるようになります。 YouTube側も、VP9のアップロード、再生に対応していて、最近では、ほとんどの動画がVP9で再生されるようになっています。 VP9、Opusを使用していると表示されているYouTubeの詳細統計情報 ただし、対応ブラウザではないと見れないので、例えば、 Internet Explorer (Windows) Safari (macOS X) はVP9非対応です。 (これらのブラウザでは、h264で再生されます。) VP9で視聴するには、 Google Chrome FireFox Microsoft Edge (EdgeHTML / Chromium) その他 Chromiumベースブラウザ (Opera, Vivaldi等) 等で見る必要があります。 いずれのブラウザもWindows, Mac共に対応、 Edge以外のブラウザはLinuxにも対応しています。 (OS自体が動画再生の要件を満たす必要があります。) YouTubeの音質は、もう悪くない！ MP4では、AACという音声コーデックが使用されてきました。 AACはMP3に比べ、比較的少ない容量でも高音質が期待できましたが、やはりCDに比べ、数値的には劣れていました。 以前はYouTube側も、最高音質AAC 192kbpsで再生されていました。 (しかし、これでも音質的にはあまり違和感を感じなかった方が多いと思います。) しかし、現在ではOpusという形式で再生されています。 YouTube側で再生されている、Opus (128kbps VBR)は、ほとんどCDと聞き分けができないとされています。(下手するとハイレゾと聞き比べてもわからないほど。) 具体的な数値でいうと、 コーデック ビットレート カットオフ周波数 AAC 128 kbps 15.8 kHz Opus 128 kbps VBR 20.0 kHz と、Opusの音質が圧倒的であることがわかります。 (カットオフ周波数が、音質のすべてはありません。) (YouTubeで再生されているAACは、上の表のAACとカットオフ周波数が異なる可能性があります。) つまり、YouTubeの音質は、低い容量でも、人間の耳では聞き分けがかなり難しいほど品質が良くなりました。 YouTubeでOpus形式の動画を再生したときのスペクトラム画像 20.0kHzでカットされている。 そのため、AAC 320kbpsやOpus、PCMやFLACでアップロードすれば、充分な音質が期待できます。 音質を特に気にしないでアップロードするなら、WebMのOpusで十分ですし、 音質重視なら、ロスレスFLACや、PCMでMKVに直接埋め込むことで、再エンコード回数を１回にすることができます。 ただし、Opusを再生するにも、対応ブラウザが必要で、 対応ブラウザ Google Chrome FireFox Microsoft Edge (EdgeHTML / Chromium) その他 Chromiumベースブラウザ (Opera, Vivaldi等) 非対応ブラウザ (AACで再生) Internet Explorer (Windows) Safari (macOS X) となっております。 YouTubeは再エンコードしている YouTubeに動画をアップロードするためには、動画を編集ソフトで書き出し(エンコード)を行う必要があります。しかし、YouTubeにアップロードされた動画は、YouTube側でも再書き出し(再エンコード)が行われます。 そのため、アップロードされた動画がそのままの品質で再生されることはありません。 しかも、MP4でアップロードされた動画も、YouTube側でWebMで再エンコードが行われるのですが、元(MP4)の品質が悪いと、いくらWebM(VP9, Opus)でも元の品質よりよくなることはありません。 ということは、品質を気にするなら再エンコードされる形式よりもいいものでアップロードする必要があります。 しかし、そのためにMP4の動画容量(ビットレート)を上げるのは、あまり効率的ではありません。 その代わりに、十分な品質ののWebM(VP9, Opus)にすれば、アップロード時の容量がMP4より小さく、そしてYouTube側できれいな動画を再生できることが期待できます。 実はVP9ももう古い？ 先ほど、VP9でアップロードすることで、より高画質な動画を期待できると述べましたが、 実は、YouTubeは新たなビデオコーデックへの対応が進んでいます。 それは、 h265 (HEVC) ではなく、 現在急上昇中のAV1というものです。 AV1と表示されているYouTubeの詳細統計情報 日本でも上位のYouTubeクリエイターでこのコーデックを再生できることが多い (ただし、元がMP4なのでそこまで期待できないが) AV1は、多くの企業に支持されている新しいコーデックで、すでにYouTubeの他にも、Netflixが対応しています。 AV1は、h265 (HEVC)やVP9に比べ、さらに圧縮率が向上していて、次の動画コーデックの実質標準規格になるとも噂されています。 ただし、まだAV1はエンコードに大変時間がかかり、個人用途としては少し微妙です。 (ブログ主の調査では、ffmpegでエンコードしたとき、AV1はVP9に比べて10倍遅い。) まとめ MP4は、今では同じ容量でも画質が悪い、音も悪いとメリットがないので、 これからYouTubeに動画をアップロードするときは、WebMのVP9、Opusでアップロードしましょう。 同じ画質、音質でも動画ファイルの容量が小さくなることが期待できます。 なお、WebM形式で出力するのには、 Adobe Premiere Proは追加のプラグインが必要です。 AviUtlも別のプラグインが必要です。 ただし、AviUtlのプラグインは今のところGUIでWebMを細かく調整できるプラグインは作られていません。 (ただし、CUIならある。) ffmpegは、VP9, AV1, Opusともにデコード、エンコードがサポートされています。 なお、個人的におすすめな設定も載せておきます。 解像度 フレーム数 映像コーデック 映像ビットレート 音声コーデック 音声ビットレート 1280x720 30 FPS VP9 5 Mbps Opus 128kbps VBR 1280x720 60 FPS VP9 5 Mbps Opus 128kbps VBR 1920x1080 30 FPS VP9 10 Mbps Opus 128kbps VBR 1920x1080 60 FPS VP9 10 Mbps Opus 128kbps VBR 2560x1440 30 FPS VP9 20 Mbps Opus 128kbps VBR 2560x1440 60 FPS VP9 20 Mbps Opus 128kbps VBR 3840x2160 30 FPS VP9 40 Mbps Opus 128kbps VBR 3840x2160 60 FPS VP9 40 Mbps Opus 128kbps VBR</summary></entry><entry><title type="html">WindowsでSLを走らせたい</title><link href="https://shiragicord.github.io/200830/sl/" rel="alternate" type="text/html" title="WindowsでSLを走らせたい" /><published>2020-08-30T00:00:00+09:00</published><updated>2020-08-30T00:00:00+09:00</updated><id>https://shiragicord.github.io/200830/sl</id><content type="html" xml:base="https://shiragicord.github.io/200830/sl/">&lt;h2 id=&quot;sl-for-win32-console&quot;&gt;&lt;a href=&quot;https://heropa.blogspot.com/2017/02/sl-for-win32-console.html&quot;&gt;SL for Win32 Console&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;この方法で無効化しても、再起動で復活する可能性があります。&lt;/p&gt;</content><author><name></name></author><category term="Android" /><category term="備忘録" /><summary type="html">以下の内容は、docomo版Galaxy A20 (SC-02M) の Android 10 で動作確認をしています。 他の機種や、Androidのバージョンによっては使えない可能性もあります。 有名なコマンドも引き続き利用可能 adb shell pm uninstall -k --user 0 &amp;lt;package name&amp;gt; このコマンドは引き続き使えます。 実はあまり知られていないコマンド 次のコマンドも使えることを確認しました。 adb shell pm disable-user &amp;lt;package name&amp;gt; それぞれの挙動の違い uninstall adb shell pm uninstall -k --user 0 &amp;lt;package name&amp;gt; を実行すると、アプリがアンインストールされます。(厳密には/system配下に残存) Androidの設定画面のアプリ一覧からも姿を消すため、 復活させるには以下のコマンドを打つ必要があります。 adb shell pm install-existing &amp;lt;package name&amp;gt; disable-user 試しに実行してみました。 $ adb shell pm disable-user com.android.contacts Package com.android.contacts new state: disabled-user 出力結果の通り、このコマンドは、パッケージに「ユーザーで無効化」属性が付与されます。 つまり、アプリが無効化されています。 そのため、Androidの設定画面から、アプリが無効化されていることが確認できます。 強制的に無効化できるため、設定画面からでは無効化できない (「無効」ボタンがグレーアウトされている) アプリでも使えます。 なお、有効化するには、設定で「有効」ボタンを押すか、 以下のコマンドを入力することで有効化できます。 adb shell pm enable com.android.contacts 使い分け方 uninstall アプリの存在を消すことができるため、将来的に有効化する可能性がない場合に使えます。 アプリリストに表示されるだけでも煩わしい場合に有効です。 disable-userを実行してもすぐに復活するアプリにはこれしかありません。 元に戻すのには、adbコマンドか初期化しかないため、面倒になります。 disable-user 設定画面には残るため、簡単に有効化できます。 今は使わないけど、将来的に使うかもしれない場合に有効です。 この方法で無効化しても、再起動で復活する可能性があります。</summary></entry><entry><title type="html">WindowsでSLを走らせたい</title><link href="https://shiragicord.github.io/200830/sl/" rel="alternate" type="text/html" title="WindowsでSLを走らせたい" /><published>2020-08-30T00:00:00+09:00</published><updated>2020-08-30T00:00:00+09:00</updated><id>https://shiragicord.github.io/200830/sl</id><content type="html" xml:base="https://shiragicord.github.io/200830/sl/">&lt;h2 id=&quot;sl-for-win32-console&quot;&gt;&lt;a href=&quot;https://heropa.blogspot.com/2017/02/sl-for-win32-console.html&quot;&gt;SL for Win32 Console&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;新山(へろぱ) 様により&lt;a href=&quot;https://heropa.blogspot.com/2017/02/sl-for-win32-console.html&quot;&gt;SL for Win32 Console&lt;/a&gt;が公開されているのでそれを使えばOK。&lt;/p&gt;
 
 &lt;p&gt;しかも音が鳴るという&lt;del&gt;謎仕様&lt;/del&gt; &lt;strong&gt;神仕様&lt;/strong&gt;。&lt;/p&gt;
