@@ -1,6 +1,16 @@
 [
 
 {
+"id": "-201103-wt",
+"title": "WindowsTerminalをそのディレクトリで開くために",
+"author": null,
+"tags": ["Windows", "WindowsTerminal", "備忘録"],
+"url": "/201103/wt/",
+"date": "2020-11-03",
+"content": "前提  Windows 10 Home 64-bit Version 20H2  Windows Terminal 1.3.2651.0  レジストリ改変時は、事前のバックアップ(エクスポート)を忘れずに！高機能で使いやすく、開発も活発なWindows Terminal現時点でカレントディレクトリから開くのがまだまだなので、独自にビルドせずに自分で実装してみました。カレントディレクトリで開くにはGithubのリポジトリでこのissueを発見しました。wt -d .またはwt -d &lt;パス&gt;でできる模様です。コマンドラインからの起動の方法を改変このような操作をしたときに、エクスプローラーのカレントディレクトリで起動できるようにします。起動用exeを作成class Program{    public static void Main(string[] args)    {        var envPathLocalAppData = Environment.GetEnvironmentVariable(\"LOCALAPPDATA\");        Process.Start(envPathLocalAppData + \"\\\\Microsoft\\\\WindowsApps\\\\wt.exe\", \"-d .\");    }}バッチファイルやVBScriptだと、レジストリPathが動作しないので、exeファイルとして作りました。環境変数Pathを作って、既存のレジストリPathを消去する場合はバッチファイルでできます。レジストリの編集HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\wt.exeの既定値を作成したexeのパス、Path値をexeのあるフォルダパスに設定します。explorer.exeの再起動できました。ただし、これだといつかレジストリ設定が戻されるので、スタートアップなりサービスなりで値を保護する必要がありそうです。もしくは、UWPアプリを自作してwt.exeとして起動するように定義すれば…右クリックメニューを追加現バージョンでは、フォルダーの選択時にOpen in Windows Terminalが表示されますが、何もない場所を右クリックして開けるようにしたい。これは、レジストリを改変するだけで行けました。[HKEY_CURRENT_USER\\SOFTWARE\\Classes\\Directory\\Background\\shell\\Windows Terminal で開く\\command]@=\"C:\\\\Users\\\\(ユーザー名)\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\wt.exe -d .\""
+}, 
+
+{
 "id": "-200922-disable_docomo",
 "title": "Android 10版 システムアプリの強制無効化方法",
 "author": null,

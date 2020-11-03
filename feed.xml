@@ -1,4 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-10-02T22:22:58+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Android 10版 システムアプリの強制無効化方法</title><link href="https://shiragicord.github.io/200922/disable-docomo/" rel="alternate" type="text/html" title="Android 10版 システムアプリの強制無効化方法" /><published>2020-09-22T00:00:00+09:00</published><updated>2020-09-22T00:00:00+09:00</updated><id>https://shiragicord.github.io/200922/disable_docomo</id><content type="html" xml:base="https://shiragicord.github.io/200922/disable-docomo/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-11-03T11:35:05+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">WindowsTerminalをそのディレクトリで開くために</title><link href="https://shiragicord.github.io/201103/wt/" rel="alternate" type="text/html" title="WindowsTerminalをそのディレクトリで開くために" /><published>2020-11-03T00:00:00+09:00</published><updated>2020-11-03T00:00:00+09:00</updated><id>https://shiragicord.github.io/201103/wt</id><content type="html" xml:base="https://shiragicord.github.io/201103/wt/">&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Windows 10 Home 64-bit Version 20H2&lt;/li&gt;
+  &lt;li&gt;Windows Terminal 1.3.2651.0&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;レジストリ改変時は、事前のバックアップ(エクスポート)を忘れずに！&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;高機能で使いやすく、開発も活発なWindows Terminal
+現時点でカレントディレクトリから開くのがまだまだなので、
+独自にビルドせずに自分で実装してみました。&lt;/p&gt;
+
+&lt;h3 id=&quot;カレントディレクトリで開くには&quot;&gt;カレントディレクトリで開くには&lt;/h3&gt;
+&lt;p&gt;Githubのリポジトリで&lt;a href=&quot;https://github.com/microsoft/terminal/issues/620#issuecomment-636767661&quot;&gt;このissue&lt;/a&gt;を発見しました。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wt -d .
+または
+wt -d &amp;lt;パス&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;でできる模様です。&lt;/p&gt;
+
+&lt;h1 id=&quot;コマンドラインからの起動の方法を改変&quot;&gt;コマンドラインからの起動の方法を改変&lt;/h1&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/H_zm_J1Q7lo?disablekb=1&amp;amp;playsinline=1&amp;amp;rel=0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;このような操作をしたときに、エクスプローラーのカレントディレクトリで起動できるようにします。&lt;/p&gt;
+
+&lt;h3 id=&quot;起動用exeを作成&quot;&gt;起動用exeを作成&lt;/h3&gt;
+&lt;div class=&quot;language-cs highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Program&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;envPathLocalAppData&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetEnvironmentVariable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LOCALAPPDATA&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;envPathLocalAppData&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;\\Microsoft\\WindowsApps\\wt.exe&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;-d .&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;バッチファイルやVBScriptだと、レジストリPathが動作しないので、exeファイルとして作りました。&lt;/p&gt;
+
+&lt;p&gt;環境変数Pathを作って、既存のレジストリPathを消去する場合はバッチファイルでできます。&lt;/p&gt;
+
+&lt;h3 id=&quot;レジストリの編集&quot;&gt;レジストリの編集&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wt.exe&lt;/code&gt;の&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;既定&lt;/code&gt;値を&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;作成したexeのパス&lt;/code&gt;、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Path&lt;/code&gt;値を&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exeのあるフォルダパス&lt;/code&gt;に設定します。&lt;/p&gt;
+
+&lt;h3 id=&quot;explorerexeの再起動&quot;&gt;explorer.exeの再起動&lt;/h3&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/tvhKOk_mCcE?disablekb=1&amp;amp;playsinline=1&amp;amp;rel=0&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;できました。&lt;/p&gt;
+
+&lt;p&gt;ただし、これだといつかレジストリ設定が戻されるので、スタートアップなりサービスなりで値を保護する必要がありそうです。&lt;/p&gt;
+
+&lt;p&gt;もしくは、UWPアプリを自作してwt.exeとして起動するように定義すれば…&lt;/p&gt;
+
+&lt;h1 id=&quot;右クリックメニューを追加&quot;&gt;右クリックメニューを追加&lt;/h1&gt;
+&lt;p&gt;現バージョンでは、フォルダーの選択時に&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Open in Windows Terminal&lt;/code&gt;が表示されますが、&lt;/p&gt;
+
+&lt;p&gt;何もない場所を右クリックして開けるようにしたい。&lt;/p&gt;
+
+&lt;p&gt;これは、レジストリを改変するだけで行けました。&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Windows Terminal で開く\command]
+@=&quot;C:\\Users\\(ユーザー名)\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe -d .&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><category term="Windows" /><category term="WindowsTerminal" /><category term="備忘録" /><summary type="html">前提 Windows 10 Home 64-bit Version 20H2 Windows Terminal 1.3.2651.0 レジストリ改変時は、事前のバックアップ(エクスポート)を忘れずに！ 高機能で使いやすく、開発も活発なWindows Terminal 現時点でカレントディレクトリから開くのがまだまだなので、 独自にビルドせずに自分で実装してみました。 カレントディレクトリで開くには Githubのリポジトリでこのissueを発見しました。 wt -d . または wt -d &amp;lt;パス&amp;gt; でできる模様です。 コマンドラインからの起動の方法を改変 このような操作をしたときに、エクスプローラーのカレントディレクトリで起動できるようにします。 起動用exeを作成 class Program { public static void Main(string[] args) { var envPathLocalAppData = Environment.GetEnvironmentVariable(&quot;LOCALAPPDATA&quot;); Process.Start(envPathLocalAppData + &quot;\\Microsoft\\WindowsApps\\wt.exe&quot;, &quot;-d .&quot;); } } バッチファイルやVBScriptだと、レジストリPathが動作しないので、exeファイルとして作りました。 環境変数Pathを作って、既存のレジストリPathを消去する場合はバッチファイルでできます。 レジストリの編集 HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wt.exeの既定値を作成したexeのパス、Path値をexeのあるフォルダパスに設定します。 explorer.exeの再起動 できました。 ただし、これだといつかレジストリ設定が戻されるので、スタートアップなりサービスなりで値を保護する必要がありそうです。 もしくは、UWPアプリを自作してwt.exeとして起動するように定義すれば… 右クリックメニューを追加 現バージョンでは、フォルダーの選択時にOpen in Windows Terminalが表示されますが、 何もない場所を右クリックして開けるようにしたい。 これは、レジストリを改変するだけで行けました。 [HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Windows Terminal で開く\command] @=&quot;C:\\Users\\(ユーザー名)\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe -d .&quot;</summary></entry><entry><title type="html">Android 10版 システムアプリの強制無効化方法</title><link href="https://shiragicord.github.io/200922/disable-docomo/" rel="alternate" type="text/html" title="Android 10版 システムアプリの強制無効化方法" /><published>2020-09-22T00:00:00+09:00</published><updated>2020-09-22T00:00:00+09:00</updated><id>https://shiragicord.github.io/200922/disable_docomo</id><content type="html" xml:base="https://shiragicord.github.io/200922/disable-docomo/">&lt;blockquote&gt;
   &lt;p&gt;以下の内容は、docomo版Galaxy A20 (SC-02M) の Android 10 で動作確認をしています。
 他の機種や、Androidのバージョンによっては使えない可能性もあります。&lt;/p&gt;
 &lt;/blockquote&gt;
