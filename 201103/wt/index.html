@@ -19,7 +19,7 @@
     <meta name="description" content="前提  Windows 10 Home 64-bit Version 20H2  Windows Terminal 1.3.2651.0  レジストリ改変時は、事前のバックアップ(エクスポート)を忘れずに！高機能で使いやすく、開発も活発なWindows Terminal現時点でカレントディレクトリから開くのがまだ...">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="canonical" href="http://localhost:4000/201103/wt/">
+    <link rel="canonical" href="https://shiragicord.github.io/201103/wt/">
     <link rel="alternate" type="application/atom+xml" title="しらぎのLogger" href="/feed.xml" />
 
     
@@ -27,7 +27,7 @@
     <meta property="og:title" content="Windows Terminalをそのディレクトリで開くために | しらぎのLogger" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="//ttskch.github.io/jekyll-ttskch-theme/assets/img/ogp.png" />
-    <meta property="og:url" content="http://localhost:4000/201103/wt/" />
+    <meta property="og:url" content="https://shiragicord.github.io/201103/wt/" />
     <meta property="og:site_name" content="しらぎのLogger" />
     <meta property="fb:admins" content="" />
     <meta property="fb:app_id" content="" />
@@ -187,7 +187,7 @@ wt -d &lt;パス&gt;
 <p>何もない場所を右クリックして開けるようにしたい。</p>
 
 <p>これは、レジストリを改変するだけで行けました。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\WindowsTerminal\command]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\WindowsTerminal]
 @="Windows Terminal をここで開く"
 
 [HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\WindowsTerminal\command]
