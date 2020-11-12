@@ -16,7 +16,7 @@
 
     <title>WindowsでSLを走らせたい | しらぎのLogger</title>
 
-    <meta name="description" content="SL for Win32 Console新山(へろぱ) 様によりSL for Win32 Consoleが公開されているのでそれを使えばOK。しかも音が鳴るという謎仕様 神仕様。Windows Subsystem for Linuxdism.exe /online /enable-feature /feature...">
+    <meta name="description" content="">
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="canonical" href="https://shiragicord.github.io/200830/sl/">
@@ -31,7 +31,7 @@
     <meta property="og:site_name" content="しらぎのLogger" />
     <meta property="fb:admins" content="" />
     <meta property="fb:app_id" content="" />
-    <meta property="og:description" content="SL for Win32 Console新山(へろぱ) 様によりSL for Win32 Consoleが公開されているのでそれを使えばOK。しかも音が鳴るという謎仕様 神仕様。Windows Subsystem for Linuxdism.exe /online /enable-feature /feature..." />
+    <meta property="og:description" content="" />
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -132,7 +132,8 @@
 </header>
 
         <section class="post-content">
-            <h2 id="sl-for-win32-console"><a href="https://heropa.blogspot.com/2017/02/sl-for-win32-console.html">SL for Win32 Console</a></h2>
+            <!--more-->
+<h2 id="sl-for-win32-console"><a href="https://heropa.blogspot.com/2017/02/sl-for-win32-console.html">SL for Win32 Console</a></h2>
 <p>新山(へろぱ) 様により<a href="https://heropa.blogspot.com/2017/02/sl-for-win32-console.html">SL for Win32 Console</a>が公開されているのでそれを使えばOK。</p>
 
 <p>しかも音が鳴るという<del>謎仕様</del> <strong>神仕様</strong>。</p>
@@ -160,21 +161,21 @@
 <p>ただ、自分の環境だとなぜか爆速でSLが走り去ってしまうので、次の方法を試した。</p>
 
 <h2 id="mingw-gcc-でビルド">MinGW-gcc でビルド</h2>
-<pre><code class="language-ps">git clone https://github.com/mtoyoda/sl.git
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/mtoyoda/sl.git
 cd sl
-</code></pre>
+</code></pre></div></div>
 <p>をして <code class="language-plaintext highlighter-rouge">gcc -o sl.exe sl.c</code> でできるかと思ったらできなかったので、</p>
 
 <p>結果的に</p>
-<pre><code class="language-ps">mingw-get install mingw32-libncurses # すでに行われているなら不要
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mingw-get install mingw32-libncurses # すでに行われているなら不要
 
 Set-Variable mingw_path (MinGWのパス)
 gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses.a
 .\sl.exe
-</code></pre>
+</code></pre></div></div>
 <p>でできた。</p>
 
-<p><img src="/assets/img/200830-sl-win.gif" alt="実行した画面" /></p>
+<p><img src="/200830/sl/win.gif" alt="実行した画面" /></p>
 
 <p>なんかすごい遅いけど満足満足。</p>
 
@@ -319,8 +320,6 @@ gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses
                     
                     
                     <li><a href="/201103/wt/">Windows Terminalをそのディレクトリで開くために</a></li>
-                    
-                    <li><a href="/200922/disable-docomo/">Android 10版 システムアプリの強制無効化方法</a></li>
                     
                     <li><a href="/200830/sl/">WindowsでSLを走らせたい</a></li>
                     

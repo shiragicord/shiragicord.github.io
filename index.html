@@ -145,202 +145,7 @@
 現時点でカレントディレクトリから開くのがまだまだなので、
 独自にビルドせずに自分で実装してみました。</p>
 
-<h3 id="カレントディレクトリで開くには">カレントディレクトリで開くには</h3>
-<p>Githubのリポジトリで<a href="https://github.com/microsoft/terminal/issues/620#issuecomment-636767661">このissue</a>を発見しました。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wt -d .
-または
-wt -d &lt;パス&gt;
-</code></pre></div></div>
-<p>でできる模様です。</p>
-
-<h1 id="コマンドラインからの起動の方法を改変">コマンドラインからの起動の方法を改変</h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/H_zm_J1Q7lo?disablekb=1&amp;playsinline=1&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-<p>このような操作をしたときに、エクスプローラーのカレントディレクトリで起動できるようにします。</p>
-
-<h3 id="起動用exeを作成">起動用exeを作成</h3>
-<div class="language-cs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Program</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="kt">var</span> <span class="n">envPathLocalAppData</span> <span class="p">=</span> <span class="n">Environment</span><span class="p">.</span><span class="nf">GetEnvironmentVariable</span><span class="p">(</span><span class="s">"LOCALAPPDATA"</span><span class="p">);</span>
-        <span class="n">Process</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="n">envPathLocalAppData</span> <span class="p">+</span> <span class="s">"\\Microsoft\\WindowsApps\\wt.exe"</span><span class="p">,</span> <span class="s">"-d ."</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>バッチファイルやVBScriptだと、レジストリPathが動作しないので、exeファイルとして作りました。</p>
-
-<p>環境変数Pathを作って、既存のレジストリPathを消去する場合はバッチファイルでできます。</p>
-
-<h3 id="レジストリの編集">レジストリの編集</h3>
-<p><code class="language-plaintext highlighter-rouge">HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\wt.exe</code>の<code class="language-plaintext highlighter-rouge">既定</code>値を<code class="language-plaintext highlighter-rouge">作成したexeのパス</code>、<code class="language-plaintext highlighter-rouge">Path</code>値を<code class="language-plaintext highlighter-rouge">exeのあるフォルダパス</code>に設定します。</p>
-
-<h3 id="explorerexeの再起動">explorer.exeの再起動</h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tvhKOk_mCcE?disablekb=1&amp;playsinline=1&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-<p>できました。</p>
-
-<p>ただし、これだといつかレジストリ設定が戻されるので、スタートアップなりサービスなりで値を保護する必要がありそうです。</p>
-
-<p>もしくは、UWPアプリを自作してwt.exeとして起動するように定義すれば…</p>
-
-<h1 id="右クリックメニューを追加">右クリックメニューを追加</h1>
-<p>現バージョンでは、フォルダーの選択時に<code class="language-plaintext highlighter-rouge">Open in Windows Terminal</code>が表示されますが、</p>
-
-<p>何もない場所を右クリックして開けるようにしたい。</p>
-
-<p>これは、レジストリを改変するだけで行けました。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\WindowsTerminal]
-@="Windows Terminal をここで開く"
-
-[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\WindowsTerminal\command]
-@="C:\\Users\\(ユーザー名)\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe -d ."
-</code></pre></div></div>
-
-            <a class="btn" href="/201103/wt/">詳しく...</a>
-            
-        </section>
-    </article>
-</div>
-
-
-<hr/>
-
-
-<div class="article-wrapper">
-    <article>
-    
-
-<header>
-    <div class="panel">
-        <h1>
-            
-            <a class="post-link" href="/200922/disable-docomo/">Android 10版 システムアプリの強制無効化方法</a>
-            
-        </h1>
-
-        <ul class="tags">
-            
-            
-            <li><i class="fa fa-tags"></i></li>
-            
-            
-            <li>
-                <a class="tag" href="/search/?t=Android">#Android</a>
-            </li>
-            
-            <li>
-                <a class="tag" href="/search/?t=備忘録">#備忘録</a>
-            </li>
-            
-        </ul>
-
-        <div class="clearfix">
-            <ul class="meta">
-                
-                <li>
-                    <i class="fa fa-calendar"></i>
-                    2020-09-22
-                </li>
-                
-
-                
-            </ul>
-        </div>
-    </div>
-
-    
-    <div style="margin-top: 1em;">
-        
-
-
-
-
-<div class="clearfix">
-    <div style="float: right !important;">
-        
-        
-        
-    </div>
-</div>
-
-    </div>
-    
-
-    
-</header>
-
-        <section class="post-content">
-            
-            
-            <blockquote>
-  <p>以下の内容は、docomo版Galaxy A20 (SC-02M) の Android 10 で動作確認をしています。
-他の機種や、Androidのバージョンによっては使えない可能性もあります。</p>
-</blockquote>
-
-<h2 id="有名なコマンドも引き続き利用可能">有名なコマンドも引き続き利用可能</h2>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm uninstall -k --user 0 &lt;package name&gt;
-</code></pre></div></div>
-<p>このコマンドは引き続き使えます。</p>
-
-<h2 id="実はあまり知られていないコマンド">実はあまり知られていないコマンド</h2>
-
-<p>次のコマンドも使えることを確認しました。</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm disable-user &lt;package name&gt;
-</code></pre></div></div>
-
-<h2 id="それぞれの挙動の違い">それぞれの挙動の違い</h2>
-<h3 id="uninstall">uninstall</h3>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm uninstall -k --user 0 &lt;package name&gt;
-</code></pre></div></div>
-<p>を実行すると、<strong>アプリがアンインストールされます</strong>。(厳密には/system配下に残存)</p>
-
-<p>Androidの設定画面のアプリ一覧からも姿を消すため、</p>
-
-<p>復活させるには以下のコマンドを打つ必要があります。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm install-existing &lt;package name&gt;
-</code></pre></div></div>
-
-<h3 id="disable-user">disable-user</h3>
-<p>試しに実行してみました。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ adb shell pm disable-user com.android.contacts
-Package com.android.contacts new state: disabled-user
-</code></pre></div></div>
-<p>出力結果の通り、このコマンドは、パッケージに「ユーザーで無効化」属性が付与されます。</p>
-
-<p>つまり、<strong>アプリが無効化</strong>されています。</p>
-
-<p>そのため、Androidの設定画面から、アプリが無効化されていることが確認できます。</p>
-
-<p><img src="/200922/disable_docomo/disabled_screenshot.jpg" alt="設定画面から「無効」が確認できる。" /></p>
-
-<p><strong>強制的に無効化できる</strong>ため、設定画面からでは無効化できない (「無効」ボタンがグレーアウトされている) アプリでも使えます。</p>
-
-<p>なお、有効化するには、設定で「有効」ボタンを押すか、</p>
-
-<p>以下のコマンドを入力することで有効化できます。</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>adb shell pm enable &lt;package name&gt;
-</code></pre></div></div>
-
-<h2 id="使い分け方">使い分け方</h2>
-<h3 id="uninstall-1">uninstall</h3>
-<p>アプリの存在を消すことができるため、<strong>将来的に有効化する可能性がない</strong>場合に使えます。</p>
-
-<p>アプリリストに表示されるだけでも<strong>煩わしい</strong>場合に有効です。</p>
-
-<p>disable-userを実行してもすぐに復活するアプリにはこれしかありません。</p>
-
-<p>元に戻すのには、adbコマンドか初期化しかないため、面倒になります。</p>
-
-<h3 id="disable-user-1">disable-user</h3>
-<p>設定画面には残るため、<strong>簡単に有効化できます</strong>。</p>
-
-<p>今は使わないけど、<strong>将来的に使うかもしれない</strong>場合に有効です。</p>
-
-<p>この方法で無効化しても、再起動で復活する可能性があります。</p>
-
-            <a class="btn" href="/200922/disable-docomo/">詳しく...</a>
+            <a class="btn" href="/201103/wt/">詳細を表示</a>
             
         </section>
     </article>
@@ -424,55 +229,9 @@ Package com.android.contacts new state: disabled-user
         <section class="post-content">
             
             
-            <h2 id="sl-for-win32-console"><a href="https://heropa.blogspot.com/2017/02/sl-for-win32-console.html">SL for Win32 Console</a></h2>
-<p>新山(へろぱ) 様により<a href="https://heropa.blogspot.com/2017/02/sl-for-win32-console.html">SL for Win32 Console</a>が公開されているのでそれを使えばOK。</p>
+            
 
-<p>しかも音が鳴るという<del>謎仕様</del> <strong>神仕様</strong>。</p>
-
-<h2 id="windows-subsystem-for-linux">Windows Subsystem for Linux</h2>
-<pre><code class="language-ps">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all
-</code></pre>
-<p>「Windowsの機能の有効化または無効化」よりWSLを有効化。</p>
-
-<p>再起動後、Microsoft Storeから好きなディストリビューションをダウンロード、インストールして初期設定。</p>
-
-<p>その後、</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS <span class="o">&gt;</span> wsl.exe
-<span class="o">(</span>WSL<span class="o">)</span> <span class="nv">$ </span><span class="nb">sudo </span>apt update
-<span class="o">(</span>WSL<span class="o">)</span> <span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>sl
-<span class="o">(</span>WSL<span class="o">)</span> <span class="nv">$ </span>sl
-</code></pre></div></div>
-<p>でSLが拝める。</p>
-
-<p>PATH内に</p>
-<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@wsl.exe <span class="kd">sl</span> <span class="err">%</span><span class="o">*</span><span class="err">%</span>
-</code></pre></div></div>
-<p>をsl.batで保存すれば、直接呼べるようになる。</p>
-
-<p>ただ、自分の環境だとなぜか爆速でSLが走り去ってしまうので、次の方法を試した。</p>
-
-<h2 id="mingw-gcc-でビルド">MinGW-gcc でビルド</h2>
-<pre><code class="language-ps">git clone https://github.com/mtoyoda/sl.git
-cd sl
-</code></pre>
-<p>をして <code class="language-plaintext highlighter-rouge">gcc -o sl.exe sl.c</code> でできるかと思ったらできなかったので、</p>
-
-<p>結果的に</p>
-<pre><code class="language-ps">mingw-get install mingw32-libncurses # すでに行われているなら不要
-
-Set-Variable mingw_path (MinGWのパス)
-gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses.a
-.\sl.exe
-</code></pre>
-<p>でできた。</p>
-
-<p><img src="/assets/img/200830-sl-win.gif" alt="実行した画面" /></p>
-
-<p>なんかすごい遅いけど満足満足。</p>
-
-<p>ちなみにこれを実行した後に、もう一回WSLで実行したらこれぐらい遅くなった…謎。</p>
-
-            <a class="btn" href="/200830/sl/">詳しく...</a>
+            <a class="btn" href="/200830/sl/">詳細を表示</a>
             
         </section>
     </article>
@@ -538,11 +297,9 @@ gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses
         <section class="post-content">
             
             
-            <h1 id="hello-world">Hello, World</h1>
+            
 
-<p>Hello Blog!!</p>
-
-            <a class="btn" href="/200823/hello/">詳しく...</a>
+            <a class="btn" href="/200823/hello/">詳細を表示</a>
             
         </section>
     </article>
@@ -669,8 +426,6 @@ gcc -I ${mingw_path}\include\ncurses -o sl.exe sl.c ${mingw_path}\lib\libncurses
                     
                     
                     <li><a href="/201103/wt/">Windows Terminalをそのディレクトリで開くために</a></li>
-                    
-                    <li><a href="/200922/disable-docomo/">Android 10版 システムアプリの強制無効化方法</a></li>
                     
                     <li><a href="/200830/sl/">WindowsでSLを走らせたい</a></li>
                     
