@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-12-20T15:23:33+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Android-x86 で Native Bridge がうまくいかない場合</title><link href="https://shiragicord.github.io/201220/android-x86/" rel="alternate" type="text/html" title="Android-x86 で Native Bridge がうまくいかない場合" /><published>2020-12-20T14:45:00+09:00</published><updated>2020-12-20T14:45:00+09:00</updated><id>https://shiragicord.github.io/201220/android-x86</id><content type="html" xml:base="https://shiragicord.github.io/201220/android-x86/">&lt;h1 id=&quot;前提&quot;&gt;前提&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-12-20T15:26:54+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Android-x86 で Native Bridge がうまくいかない場合</title><link href="https://shiragicord.github.io/201220/android-x86/" rel="alternate" type="text/html" title="Android-x86 で Native Bridge がうまくいかない場合" /><published>2020-12-20T14:45:00+09:00</published><updated>2020-12-20T14:45:00+09:00</updated><id>https://shiragicord.github.io/201220/android-x86</id><content type="html" xml:base="https://shiragicord.github.io/201220/android-x86/">&lt;h1 id=&quot;前提&quot;&gt;前提&lt;/h1&gt;
 
 &lt;blockquote&gt;
 
@@ -22,7 +22,7 @@
 &lt;p&gt;しかし、そのサイトはリンク先のアドレスがただの赤字のテキストで書かれていたので、そのサイトに飛んでみると、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;houdini.sfs&lt;/code&gt;がダウンロードされました。&lt;/p&gt;
 
 &lt;p&gt;URL
-http://dl.android-x86.org/houdini.php?v=9_y&lt;/p&gt;
+&lt;a href=&quot;http://dl.android-x86.org/houdini.php?v=9_y&quot;&gt;http://dl.android-x86.org/houdini.php?v=9_y&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/system/bin/enable_nativebridge&lt;/code&gt;を読み進めてみると、どうやらsfsファイルを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/data/media/0/arm/houdini9_y.sfs&lt;/code&gt;に設置することでインストールできそうです。&lt;/p&gt;
 
