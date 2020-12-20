@@ -1,6 +1,16 @@
 [
 
 {
+"id": "-201220-android-x86",
+"title": "Android-x86 で Native Bridge がうまくいかない場合",
+"author": null,
+"tags": ["Android", "備忘録"],
+"url": "/201220/android-x86/",
+"date": "2020-12-20",
+"content": "前提  Android-x86_64 バージョン 9.0-rc2たびたびお世話になりますAndroid x86armのアプリも動けるようにlibhoudiniというものがAndroidの設定画面から有効化できるようになっています。しかし、スイッチをオンにしても/system/lib/armの中身が空っぽのままです。なぜなのかいろいろ探ってみました。原因/system/bin/enable_nativebridgeをのぞいてみると、最初の方にURLがたくさん。自力でアクセスしてみると、中国の短縮URLサービスらしきサイトが表示されました。私は中国語は理解できないので、サービスが機能していないのか、あるいは何かしないとアクセスできないのかわかりませんでした。しかし、そのサイトはリンク先のアドレスがただの赤字のテキストで書かれていたので、そのサイトに飛んでみると、houdini.sfsがダウンロードされました。URLhttp://dl.android-x86.org/houdini.php?v=9_y/system/bin/enable_nativebridgeを読み進めてみると、どうやらsfsファイルを/data/media/0/arm/houdini9_y.sfsに設置することでインストールできそうです。# cd /data/media/0# cp Download/houdini.sfs arm/houdini9_y.sfs# . /system/bin/enable_nativebridgeこれで/system/bin/armにarmのオブジェクトファイルが設置されました。なお、Androidの設定をもう一回オフオンしてしまうと、/data/media/0/arm/houdini9_y.sfsが意味のないHTMLファイルで上書きされてしまうので、そうなってしまったらやり直しましょう。"
+}, 
+
+{
 "id": "-201103-wt",
 "title": "Windows Terminalをそのディレクトリで開くために",
 "author": null,

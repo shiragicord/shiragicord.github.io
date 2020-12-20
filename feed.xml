@@ -1,4 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-11-12T21:34:53+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Windows Terminalをそのディレクトリで開くために</title><link href="https://shiragicord.github.io/201103/wt/" rel="alternate" type="text/html" title="Windows Terminalをそのディレクトリで開くために" /><published>2020-11-03T00:00:00+09:00</published><updated>2020-11-03T00:00:00+09:00</updated><id>https://shiragicord.github.io/201103/wt</id><content type="html" xml:base="https://shiragicord.github.io/201103/wt/">&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2020-12-20T15:12:43+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">Android-x86 で Native Bridge がうまくいかない場合</title><link href="https://shiragicord.github.io/201220/android-x86/" rel="alternate" type="text/html" title="Android-x86 で Native Bridge がうまくいかない場合" /><published>2020-12-20T14:45:00+09:00</published><updated>2020-12-20T14:45:00+09:00</updated><id>https://shiragicord.github.io/201220/android-x86</id><content type="html" xml:base="https://shiragicord.github.io/201220/android-x86/">&lt;h1 id=&quot;前提&quot;&gt;前提&lt;/h1&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;Android-x86_64 バージョン 9.0-rc2&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;たびたびお世話になりますAndroid x86&lt;/p&gt;
+
+&lt;p&gt;armのアプリも動けるようにlibhoudiniというものがAndroidの設定画面から有効化できるようになっています。&lt;/p&gt;
+
+&lt;p&gt;しかし、スイッチをオンにしても/system/lib/armの中身が空っぽのままです。&lt;/p&gt;
+
+&lt;p&gt;なぜなのかいろいろ探ってみました。
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;h1 id=&quot;原因&quot;&gt;原因&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/system/bin/enable_nativebridge&lt;/code&gt;をのぞいてみると、最初の方にURLがたくさん。
+自力でアクセスしてみると、中国の短縮URLサービスらしきサイトが表示されました。&lt;/p&gt;
+
+&lt;p&gt;私は中国語は理解できないので、サービスが機能していないのか、あるいは何かしないとアクセスできないのかわかりませんでした。&lt;/p&gt;
+
+&lt;p&gt;しかし、そのサイトはリンク先のアドレスがただの赤字のテキストで書かれていたので、そのサイトに飛んでみると、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;houdini.sfs&lt;/code&gt;がダウンロードされました。&lt;/p&gt;
+
+&lt;p&gt;URL
+http://dl.android-x86.org/houdini.php?v=9_y&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/system/bin/enable_nativebridge&lt;/code&gt;を読み進めてみると、どうやらsfsファイルを&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/data/media/0/arm/houdini9_y.sfs&lt;/code&gt;に設置することでインストールできそうです。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell-session highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /data/media/0
+&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cp &lt;/span&gt;Download/houdini.sfs arm/houdini9_y.sfs
+&lt;span class=&quot;gp&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /system/bin/enable_nativebridge
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;これで/system/bin/armにarmのオブジェクトファイルが設置されました。&lt;/p&gt;
+
+&lt;p&gt;なお、Androidの設定をもう一回オフオンしてしまうと、&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/data/media/0/arm/houdini9_y.sfs&lt;/code&gt;が意味のないHTMLファイルで上書きされてしまうので、そうなってしまったらやり直しましょう。&lt;/p&gt;</content><author><name></name></author><category term="Android" /><category term="備忘録" /><summary type="html">前提 Android-x86_64 バージョン 9.0-rc2 たびたびお世話になりますAndroid x86 armのアプリも動けるようにlibhoudiniというものがAndroidの設定画面から有効化できるようになっています。 しかし、スイッチをオンにしても/system/lib/armの中身が空っぽのままです。 なぜなのかいろいろ探ってみました。</summary></entry><entry><title type="html">Windows Terminalをそのディレクトリで開くために</title><link href="https://shiragicord.github.io/201103/wt/" rel="alternate" type="text/html" title="Windows Terminalをそのディレクトリで開くために" /><published>2020-11-03T00:00:00+09:00</published><updated>2020-11-03T00:00:00+09:00</updated><id>https://shiragicord.github.io/201103/wt</id><content type="html" xml:base="https://shiragicord.github.io/201103/wt/">&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Windows 10 Home 64-bit Version 20H2&lt;/li&gt;
   &lt;li&gt;Windows Terminal 1.3.2651.0&lt;/li&gt;
