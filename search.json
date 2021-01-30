@@ -1,6 +1,16 @@
 [
 
 {
+"id": "-210130-atcoder-why-ac",
+"title": "書いた自分自身が理解できていないAtCoderのAC集",
+"author": null,
+"tags": ["AtCoder", "競技プログラミング", "備忘録"],
+"url": "/210130/atcoder-why-ac/",
+"date": "2021-01-30",
+"content": "ABC190 D - Staircase SequencesACの提出 https://atcoder.jp/contests/abc190/submissions/19815260全ての約数において、その値が整数で成り立つ公差１の等差数列になるかを逐次検証。Nが奇数の場合、１つの約数から２つの等差数列が成り立つ可能性があることを見事に見抜いたが、これだけでは説明できていない."
+}, 
+
+{
 "id": "-201220-android-x86",
 "title": "Android-x86 で Native Bridge がうまくいかない場合",
 "author": null,
@@ -8,16 +18,6 @@
 "url": "/201220/android-x86/",
 "date": "2020-12-20",
 "content": "前提  Android-x86_64 バージョン 9.0-rc2たびたびお世話になりますAndroid x86armのアプリも動けるようにlibhoudiniというものがAndroidの設定画面から有効化できるようになっています。しかし、スイッチをオンにしても/system/lib/armの中身が空っぽのままです。なぜなのかいろいろ探ってみました。原因/system/bin/enable_nativebridgeをのぞいてみると、最初の方にURLがたくさん。自力でアクセスしてみると、中国の短縮URLサービスらしきサイトが表示されました。私は中国語は理解できないので、サービスが機能していないのか、あるいは何かしないとアクセスできないのかわかりませんでした。しかし、そのサイトはリンク先のアドレスがただの赤字のテキストで書かれていたので、そのサイトに飛んでみると、houdini.sfsがダウンロードされました。URLhttp://dl.android-x86.org/houdini.php?v=9_y/system/bin/enable_nativebridgeを読み進めてみると、どうやらsfsファイルを/data/media/0/arm/houdini9_y.sfsに設置することでインストールできそうです。# cd /data/media/0# cp Download/houdini.sfs arm/houdini9_y.sfs# . /system/bin/enable_nativebridgeこれで/system/bin/armにarmのオブジェクトファイルが設置されました。なお、Androidの設定をもう一回オフオンしてしまうと、/data/media/0/arm/houdini9_y.sfsが意味のないHTMLファイルで上書きされてしまうので、そうなってしまったらやり直しましょう。"
-}, 
-
-{
-"id": "-201103-wt",
-"title": "Windows Terminalをそのディレクトリで開くために",
-"author": null,
-"tags": ["Windows", "WindowsTerminal", "備忘録"],
-"url": "/201103/wt/",
-"date": "2020-11-03",
-"content": "前提  Windows 10 Home 64-bit Version 20H2  Windows Terminal 1.3.2651.0  レジストリ改変時は、事前のバックアップ(エクスポート)を忘れずに！高機能で使いやすく、開発も活発なWindows Terminal現時点でカレントディレクトリから開くのがまだまだなので、独自にビルドせずに自分で実装してみました。カレントディレクトリで開くにはGithubのリポジトリでこのissueを発見しました。wt -d .またはwt -d &lt;パス&gt;でできる模様です。コマンドラインからの起動の方法を改変このような操作をしたときに、エクスプローラーのカレントディレクトリで起動できるようにします。起動用exeを作成class Program{    public static void Main(string[] args)    {        var envPathLocalAppData = Environment.GetEnvironmentVariable(\"LOCALAPPDATA\");        Process.Start(envPathLocalAppData + \"\\\\Microsoft\\\\WindowsApps\\\\wt.exe\", \"-d .\");    }}バッチファイルやVBScriptだと、レジストリPathが動作しないので、exeファイルとして作りました。環境変数Pathを作って、既存のレジストリPathを消去する場合はバッチファイルでできます。レジストリの編集HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\wt.exeの既定値を作成したexeのパス、Path値をexeのあるフォルダパスに設定します。explorer.exeの再起動できました。ただし、これだといつかレジストリ設定が戻されるので、スタートアップなりサービスなりで値を保護する必要がありそうです。もしくは、UWPアプリを自作してwt.exeとして起動するように定義すれば…右クリックメニューを追加現バージョンでは、フォルダーの選択時にOpen in Windows Terminalが表示されますが、何もない場所を右クリックして開けるようにしたい。これは、レジストリを改変するだけで行けました。[HKEY_CURRENT_USER\\SOFTWARE\\Classes\\Directory\\Background\\shell\\WindowsTerminal]@=\"Windows Terminal をここで開く\"[HKEY_CURRENT_USER\\SOFTWARE\\Classes\\Directory\\Background\\shell\\WindowsTerminal\\command]@=\"C:\\\\Users\\\\(ユーザー名)\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\\\\wt.exe -d .\""
 }, 
 
 {
