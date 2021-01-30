@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2021-01-30T23:07:20+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">書いた自分自身が理解できていないAtCoderのAC集</title><link href="https://shiragicord.github.io/210130/atcoder-why-ac/" rel="alternate" type="text/html" title="書いた自分自身が理解できていないAtCoderのAC集" /><published>2021-01-30T22:57:00+09:00</published><updated>2021-01-30T22:57:00+09:00</updated><id>https://shiragicord.github.io/210130/atcoder-why-ac</id><content type="html" xml:base="https://shiragicord.github.io/210130/atcoder-why-ac/">&lt;p&gt;この記事では、AtCoderに挑んだときにACが
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://shiragicord.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shiragicord.github.io/" rel="alternate" type="text/html" /><updated>2021-01-30T23:08:14+09:00</updated><id>https://shiragicord.github.io/feed.xml</id><title type="html">しらぎのLogger</title><entry><title type="html">書いた自分自身が理解できていないAtCoderのAC集</title><link href="https://shiragicord.github.io/210130/atcoder-why-ac/" rel="alternate" type="text/html" title="書いた自分自身が理解できていないAtCoderのAC集" /><published>2021-01-30T22:57:00+09:00</published><updated>2021-01-30T22:57:00+09:00</updated><id>https://shiragicord.github.io/210130/atcoder-why-ac</id><content type="html" xml:base="https://shiragicord.github.io/210130/atcoder-why-ac/">&lt;p&gt;この記事では、AtCoderに挑んだときにACが
 出たには出たが、論理的に理解できていない問題を解決するために記録しておく備忘録です。&lt;/p&gt;
 
 &lt;p&gt;つまり、この記事は、公開されているプライベート情報であり、公共的に利益はありません。&lt;/p&gt;
@@ -6,7 +6,7 @@
 &lt;!--more--&gt;
 
 &lt;h2 id=&quot;abc190-d---staircase-sequences&quot;&gt;&lt;a href=&quot;https://atcoder.jp/contests/abc190/tasks/abc190_d&quot;&gt;ABC190 D - Staircase Sequences&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;ACの提出 https://atcoder.jp/contests/abc190/submissions/19815260&lt;/p&gt;
+&lt;p&gt;ACの提出 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://atcoder.jp/contests/abc190/submissions/19815260&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;全ての約数において、その値が整数で成り立つ公差１の等差数列になるかを逐次検証。&lt;/p&gt;
 
