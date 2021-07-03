@@ -58,8 +58,11 @@
 
             function onPlayerStateChange(event) {
                 var ytStatus = event.data;
+                if (ytStatus == YT.PlayerState.PLAYING) {
+                    $("#first_button").hide();
+                }
                 if (ytStatus == YT.PlayerState.PAUSED) {
-                        ytPlayer.playVideo();
+                    ytPlayer.playVideo();
                 }
             }
 
@@ -98,7 +101,9 @@
                             $("#main_content").css("transform-origin", "top left")
                         } 
                         document.getElementById("body").requestFullscreen();
-                        $("#first_button").hide();
+                        $("#first_button").css("text-decoration", "none");
+                        $("#first_button").css("color", "#FFFFFF");
+                        $("#first_button").text("別のブラウザでもう一度お試しください。");
                         ytPlayer.setOption("cc", "fontSize", -1);
                         ytPlayer.playVideo();
                     }
