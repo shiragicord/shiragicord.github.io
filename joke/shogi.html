@@ -1,0 +1,93 @@
+<html>
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta property="og:title" content="将棋の勝ち方" />
+        <meta property="og:url" content="https://shiragicord.github.com/joke/shogi.html" />
+        <meta property="og:image" content="https://pbs.twimg.com/profile_images/1083971694799155200/ktmAOOYO_400x400.jpg" />
+        <meta property="og:type" content="website" />
+
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+        <style>
+            body {
+                margin: 0;
+            }
+            #main_content {
+                position: fixed;
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: 0;
+            }
+            #first_button {
+                position: fixed;
+                display: block;
+                margin: 0;
+                width: 100%;
+                line-height: 100vh;
+                z-index: 2;
+                text-align: center;
+                color: #00a2ff;
+                text-decoration: underline;
+                background-color: #000000;
+                font-size: xx-large;
+
+            }
+            #transparent {
+                position: fixed;
+                display: block;
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0);
+                z-index: 1;
+            }
+        </style>
+        <script>
+            var tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            let ytPlayer
+            function onYouTubeIframeAPIReady() {
+                ytPlayer = new YT.Player(
+                    'main_content', // 埋め込む場所の指定
+                        {
+                            videoId: 'BKl4gZDWP34' // YouTubeのID
+                        }
+                );
+            }
+
+            $(window).on("load", function() {
+
+                let flag = true;
+                $("#first_button").on("click", function() {
+                    if (flag) {
+                        flag = false;
+
+                        if(screen.orientation.type == "portrait-primary" || screen.orientation.type == "portrait-secondary") {
+                            $("#main_content").css("width", "100vh");
+                            $("#main_content").css("height", "calc(100vw)");
+                            $("#main_content").css("transform", "rotate(90deg) translateY(-100vw)");
+                            $("#main_content").css("transform-origin", "top left")
+                        } 
+                        document.getElementById("body").requestFullscreen();
+                        $("#first_button").hide();
+                        ytPlayer.setOption("cc", "fontSize", -1);
+                        ytPlayer.playVideo();
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body id="body">
+        <div id="first_button">タップしてね！</div>
+        <div id="transparent"></div>
+        <div id="main_content"></div>
+    </body>
+</html>
