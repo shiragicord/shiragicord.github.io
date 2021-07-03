@@ -23,6 +23,7 @@
                 width: 100%;
                 height: 100vh;
                 z-index: 0;
+                transform-origin: top left;
             }
             #first_button {
                 position: fixed;
@@ -87,6 +88,18 @@
                 );
             }
 
+            window.screen.orientation.addEventListener("change", function(ev) {
+                if(screen.orientation.type == "portrait-primary" || screen.orientation.type == "portrait-secondary") {
+                    $("#main_content").css("width", "100vh");
+                    $("#main_content").css("height", "100vw");
+                    $("#main_content").css("transform", "rotate(90deg) translateY(-100vw)");
+                } else {
+                    $("#main_content").css("width", "100%");
+                    $("#main_content").css("height", "100vh");
+                    $("#main_content").css("transform", "");
+                }
+            });
+
             $(window).on("load", function() {
 
                 let flag = true;
@@ -94,21 +107,20 @@
                     if (flag) {
                         flag = false;
 
-                        if(screen.orientation.type == "portrait-primary" || screen.orientation.type == "portrait-secondary") {
-                            $("#main_content").css("width", "100vh");
-                            $("#main_content").css("height", "100vw");
-                            $("#main_content").css("transform", "rotate(90deg) translateY(-100vw)");
-                            $("#main_content").css("transform-origin", "top left")
-                        } 
                         document.getElementById("body").requestFullscreen();
+                        window.screen.orientation.lock('landscape');
+                        ytPlayer.setOption("cc", "fontSize", -1);
+                        ytPlayer.playVideo();
                         $("#first_button").css("text-decoration", "none");
                         $("#first_button").css("color", "#FFFFFF");
                         $("#first_button").css("font-size", "medium");
                         $("#first_button").text("別のブラウザでもう一度お試しください。");
-                        ytPlayer.setOption("cc", "fontSize", -1);
-                        ytPlayer.playVideo();
                     }
-                })
+                });
+                $("#transparent").on("click", function() {
+                    document.getElementById("body").requestFullscreen();
+                    window.screen.orientation.lock('landscape');
+                });
             });
         </script>
     </head>
