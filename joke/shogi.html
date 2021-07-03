@@ -90,7 +90,7 @@
                 );
             }
 
-            window.screen.orientation.addEventListener("change", function(ev) {
+			function optimizeOrientation() {
                 if(screen.orientation.type == "portrait-primary" || screen.orientation.type == "portrait-secondary") {
                     $("#main_content").css("width", "100vh");
                     $("#main_content").css("height", "100vw");
@@ -100,6 +100,10 @@
                     $("#main_content").css("height", "100vh");
                     $("#main_content").css("transform", "");
                 }
+			}
+
+            window.screen.orientation.addEventListener("change", function(ev) {
+				optimizeOrientation()
             });
 
             $(window).on("load", function() {
@@ -111,8 +115,12 @@
 
                         document.getElementById("body").requestFullscreen();
                         window.screen.orientation.lock('landscape');
+						optimizeOrientation()
+						
                         ytPlayer.setOption("cc", "fontSize", -1);
                         ytPlayer.playVideo();
+						
+						
                         $("#first_button").css("text-decoration", "none");
                         $("#first_button").css("color", "#FFFFFF");
                         $("#first_button").css("font-size", "medium");
