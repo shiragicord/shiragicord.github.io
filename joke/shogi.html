@@ -103,7 +103,7 @@
 			}
 
             window.screen.orientation.addEventListener("change", function(ev) {
-				optimizeOrientation()
+				optimizeOrientation();
             });
 
             $(window).on("load", function() {
@@ -115,8 +115,8 @@
 
                         document.getElementById("body").requestFullscreen();
                         window.screen.orientation.lock('landscape');
-						optimizeOrientation()
-						
+						optimizeOrientation();
+
                         ytPlayer.setOption("cc", "fontSize", -1);
                         ytPlayer.playVideo();
 						
